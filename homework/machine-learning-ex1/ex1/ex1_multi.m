@@ -33,8 +33,8 @@ clear ; close all; clc
 
 fprintf('Loading data ...\n');
 
-%% Load Data
-data = load('ex1data2.txt');
+%% Load Data 加载数据
+data = load('ex1data2.txt');    
 X = data(:, 1:2);
 y = data(:, 3);
 m = length(y);
@@ -78,16 +78,18 @@ X = [ones(m, 1) X];
 %
 % Hint: At prediction, make sure you do the same feature normalization.
 %
-
+disp(X);
 fprintf('Running gradient descent ...\n');
 
 % Choose some alpha value
-alpha = 0.01;
+%alpha = 0.01;
+%num_iters = 400;
+alpha = 1.2;
 num_iters = 400;
 
 % Init Theta and Run Gradient Descent 
 theta = zeros(3, 1);
-[theta, J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters);
+[theta,J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters);
 
 % Plot the convergence graph
 figure;
@@ -104,8 +106,11 @@ fprintf('\n');
 % ====================== YOUR CODE HERE ======================
 % Recall that the first column of X is all-ones. Thus, it does
 % not need to be normalized.
-price = 0; % You should change this
-
+%
+% 这里要注意，需要把输入的值进行 normalize，然后才能代入预测方程中
+predict_x = [1650,3];
+predict_x = (predict_x - mu) ./ sigma;
+price = [1, predict_x] * theta;
 
 % ============================================================
 
@@ -130,7 +135,7 @@ fprintf('Solving with normal equations...\n');
 %
 
 %% Load Data
-data = csvread('ex1data2.txt');
+data = csvread('ex1data2.txt');   % 重新加载数据
 X = data(:, 1:2);
 y = data(:, 3);
 m = length(y);
@@ -139,7 +144,7 @@ m = length(y);
 X = [ones(m, 1) X];
 
 % Calculate the parameters from the normal equation
-theta = normalEqn(X, y);
+theta = normalEqn(X, y);      % 使用正规方程进行计算
 
 % Display normal equation's result
 fprintf('Theta computed from the normal equations: \n');
@@ -149,8 +154,7 @@ fprintf('\n');
 
 % Estimate the price of a 1650 sq-ft, 3 br house
 % ====================== YOUR CODE HERE ======================
-price = 0; % You should change this
-
+price = [1, 1650, 3] * theta;   % 预测结果
 
 % ============================================================
 

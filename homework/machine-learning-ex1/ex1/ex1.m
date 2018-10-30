@@ -93,7 +93,7 @@ hold off % don't overlay any more plots on this figure
 fprintf('Program paused. Press enter to continue.\n');
 pause;
 
-% --------------【改动2】绘制代价和theta变化曲线 start --------------
+% --------------【改动2】绘制cost和theta变化曲线 start --------------
 fprintf('Size of J_history saved by gradient descent:\n');
 fprintf('%f\n', size(J_history));
 iterX = [1:iterations]'; % 生成图像横坐标，迭代次数
@@ -113,7 +113,7 @@ plot(iterX,theta0_history,'-','linewidth',2);
 hold on;
 plot(iterX,theta1_history,'-','linewidth',2,'color','r');
 title('theta of each step'),xlabel('iteration'),ylabel('value of theta'),legend('theta0','theta1');
-% --------------【改动2】绘制代价和theta变化曲线 end --------------
+% --------------【改动2】绘制cost和theta变化曲线 end --------------
 
 % Predict values for population sizes of 35,000 and 70,000
 predict1 = [1, 3.5] *theta;

@@ -7,7 +7,7 @@ function [X_norm, mu, sigma] = featureNormalize(X)
 
 % You need to set these values correctly
 X_norm = X;
-mu = zeros(1, size(X, 2));
+mu = zeros(1, size(X, 2)); % 1行，列数和X相同
 sigma = zeros(1, size(X, 2));
 
 % ====================== YOUR CODE HERE ======================
@@ -26,13 +26,10 @@ sigma = zeros(1, size(X, 2));
 % Hint: You might find the 'mean' and 'std' functions useful.
 %       
 
+mu = mean(X);
+sigma = std(X);
 
-
-
-
-
-
-
+X_norm = (X_norm - mu) ./ sigma;
 
 % ============================================================
 
